@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Result From Testing News</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Nav section -->
+    <div class="inner-header" style="padding: 11px;">
+        <div class="header clearfix">
+            <nev>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <ul class="nav nav-pills float-left">
+                            <li class="nav-item"><a class="nav-link" style="color:rgb(122, 88, 191)" href="{{ url_for('home') }}">Home</a></li>
+                        </ul>
+                        <ul class="nav nav-pills float-right">
+                            <li class="nav-item"><a class="nav-link active" href="{{ url_for('test') }}" style="background-color:rgb(122, 88, 191)">Test</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('example') }}" style="color:rgb(122, 88, 191);">Example</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}" style="color:rgb(122, 88, 191);">About Us</a></li>
+                        </ul>
+                    </div>
+                     <div class="col-sm-2"></div>
+                </div>
+            </nev>
+        </div>
+    </div>
+
+    <!-- Hello section -->
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col">
+                    <h1 align="center">AUTOMATIC NEWS EXTRACTION</h1>
+                    <!-- Space section -->
+                    <div class="container">
+                        <hr WIDTH="100%" ALIGN="center" SIZE="30" NOSHADE COLOR="#BBBBBB">
+                    </div>
+                    <p align="center">Thank you for testing !</p>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content from filtering -->
+    <div class="container">
+        <div class="row title">
+            <div><h3>Raw News</h3></div>
+            <br>
+            <div>{{ result_news_raw }}</div>
+        </div>
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+    <div class="container">
+        <div class="row title">
+            <div><h3>Tokenized</h3></div>
+            <br>
+            <div>{{ result_news_tok }}</div>
+        </div>
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+    <div class="container">
+        <div class="row title">
+            <div><h3>Parts of Speech</h3></div>
+            <br>
+            <div>{{ result_news_pos }}</div>
+        </div>
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+    <div class="container">
+        <div class="row title">
+            <div><h3>NER: person</h3></div>
+            <br>
+            <div>{{ result_news_per }}</div>
+        </div>
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+    <div class="container">
+        <div class="row title">
+            <div><h3>NER: organization</h3></div>
+            <br>
+            <div>{{ result_news_org }}</div>
+        </div>
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+    <div class="container">
+        <div class="row title">
+            <div><h3>NER: currency</h3></div>
+            <br>
+            <div>{{ result_news_cur }}</div>
+        </div>
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+    <div class="container">
+        <div class="row title">
+            <div><h3>NER: date event</h3></div>
+            <br>
+            <div>{{ result_news_dat }}</div>
+        </div>
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+
+    <!-- Footer section -->
+    <footer class="bd-footer text-muted" style="background-color:rgb(70, 34, 121);">
+        <div class="container-fluid p-3 p-md-5">
+            <font color="white">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>Licence</h4>
+                        <p>© SCB and NLP Team since 2019</p>
+                        <p>Since June 2019</p>
+                        <p>Last modified July 2019</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Contributor</h4>
+                        <small>Lead Professional Data Scientist</small>
+                        <p>Boontawee SUNTISRIVARAPORN</p>
+                        <small>Product Manager</small>
+                        <p>Salin SUPAPRUKSAPONG</p>
+                        <small>Senior Professional Data Scientist</small>
+                        <p>Peerasak INTARAPAIBOON</p>
+                        <small>Professional Data Scientist</small>
+                        <p>Sorratat SIRIRATTANAJAKRIN</p>
+                        <small>Professional Data Scientist</small>
+                        <p>Jirayut KEAWCHUEN</p>
+                    </div>
+                </div>
+            </font>
+        </div>
+    </footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>

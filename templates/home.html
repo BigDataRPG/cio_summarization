@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>First page NLP project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="static/css/custom.css">
+</head>
+
+<body>
+
+    <!-- Nav section -->
+    <div class="inner-header" style="padding: 11px;">
+        <div class="header clearfix">
+            <nev>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <ul class="nav nav-pills float-left">
+                            <li class="nav-item"><a class="nav-link active" style="background-color:rgb(122, 88, 191)" href="{{ url_for('home') }}">Home</a></li>
+                        </ul>
+                        <ul class="nav nav-pills float-right">
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}" style="color:rgb(122, 88, 191);">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </nev>
+        </div>
+    </div>
+
+    <!-- Cut Edge Section section -->
+    <div class="container-fluid p-3 p-md-1" style="background-color: #343a40">
+
+    </div>
+
+    <!-- HELLO section -->
+    <div class="container" style="padding: 20px">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col">
+                <h2 align="center">START VERIFICATION NEWS SUMMARIZATION</h2>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+
+
+    <!-- Cut Edge Section section -->
+    <div class="container-fluid p-3 p-md-1" style="background-color: #343a40">
+
+    </div>
+
+
+    <!-- Search Cached section -->
+    <div class="container" style="padding: 20px">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            {% if date_from and date_to and key_word %}
+            <div class="col-sm" ALIGN="center">
+                <h5>TOTAL NEWS: </h5>
+                {{ date_from }}
+            </div>
+            <div class="col-sm" ALIGN="center">
+                <h5>COMPLETED: </h5>
+                {{ date_to }}
+            </div>
+            <div class="col-sm" ALIGN="center">
+                <h5>LEFT: </h5>
+                <p> {{ key_word }} </p>
+            </div>
+            {% endif %}
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+
+    <!-- Content Search section -->
+    <div class="container">
+        <!-- For loop Content from Search-->
+        <div class="container">
+            {% for news in results %}
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <p><strong>SOURCE: </strong>{{ news._source.source }}</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p><strong>DATE: </strong>{{ news._source.date[:10] }}</p>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <p><strong>SUMMARY: </strong></p>
+                        {{ news._source.subtitle }}
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <span style="font-weight:bold">
+                            <p>ORIGINAL SOURCE: <a href="{{ news._source.url }}">READ MORE CLICK</a></p>
+                        </span>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm">
+                        <p><strong>Name Entity: </strong></p>
+                        {{ news._source.NER_per }}
+                        {{ news._source.NER_org }}
+                    </div>
+                    <div class="col-sm">
+                        <p><strong>Event Date: </strong></p>
+                        {{ news._source.NER_dat }}
+                    </div>
+                    <div class="col-sm">
+                        <p><strong>Flow Currency: </strong></p>
+                        {{ news._source.NER_cur }}
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Space section -->
+    <div class="container">
+        <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+    </div>
+    <!-- Footer section -->
+    <footer class="bd-footer text-muted" style="background-color:rgb(70, 34, 121);">
+        <div class="container-fluid p-3 p-md-5">
+            <font color="white">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>Licence</h4>
+                        <p>© SCB and NLP Team since 2019</p>
+                        <p>Data Science Division</p>
+                        <p>Last modified July 2019</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Contributor</h4>
+                        <small>Lead Professional Data Scientist</small>
+                        <p>Boontawee SUNTISRIVARAPORN</p>
+                        <small>Product Manager</small>
+                        <p>Salin SUPAPRUKSAPONG</p>
+                        <small>Senior Professional Data Scientist</small>
+                        <p>Peerasak INTARAPAIBOON</p>
+                        <small>Professional Data Scientist</small>
+                        <p>Sorratat SIRIRATTANAJAKRIN</p>
+                        <small>Professional Data Scientist</small>
+                        <p>Jirayut KEAWCHUEN</p>
+                    </div>
+                </div>
+            </font>
+        </div>
+    </footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>
