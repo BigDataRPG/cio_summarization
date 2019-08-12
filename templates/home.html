@@ -57,20 +57,18 @@
     <div class="container" style="padding: 20px">
         <div class="row">
             <div class="col-sm-2"></div>
-            {% if date_from and date_to and key_word %}
             <div class="col-sm" ALIGN="center">
                 <h5>TOTAL NEWS: </h5>
-                {{ date_from }}
+                {{ total_result }}
             </div>
             <div class="col-sm" ALIGN="center">
                 <h5>COMPLETED: </h5>
-                {{ date_to }}
+                {{ done_result }}
             </div>
             <div class="col-sm" ALIGN="center">
                 <h5>LEFT: </h5>
-                <p> {{ key_word }} </p>
+                <p> {{ left_result }} </p>
             </div>
-            {% endif %}
             <div class="col-sm-2"></div>
         </div>
     </div>
@@ -79,49 +77,34 @@
     <div class="container">
         <!-- For loop Content from Search-->
         <div class="container">
-            {% for news in results %}
+            {% for long_news in left_result_obj %}
                 <div class="row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-4">
-                        <p><strong>SOURCE: </strong>{{ news._source.source }}</p>
+                        <p><strong>SOURCE: </strong></p>
+                        {{ long_news.body }}
                     </div>
                     <div class="col-sm-4">
-                        <p><strong>DATE: </strong>{{ news._source.date[:10] }}</p>
-                    </div>
-                    <div class="col-sm-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <p><strong>SUMMARY: </strong></p>
-                        {{ news._source.subtitle }}
+                        <p><strong>DATE: </strong></p>
+                        {{ long_news.summary }}
                     </div>
                     <div class="col-sm-2"></div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <span style="font-weight:bold">
-                            <p>ORIGINAL SOURCE: <a href="{{ news._source.url }}">READ MORE CLICK</a></p>
-                        </span>
-                    </div>
-                    <div class="col-sm-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2"></div>
                     <div class="col-sm">
                         <p><strong>Name Entity: </strong></p>
-                        {{ news._source.NER_per }}
-                        {{ news._source.NER_org }}
+                        {{ blank }}
+                        {{ blank }}
                     </div>
                     <div class="col-sm">
                         <p><strong>Event Date: </strong></p>
-                        {{ news._source.NER_dat }}
+                        {{ blank }}
                     </div>
                     <div class="col-sm">
                         <p><strong>Flow Currency: </strong></p>
-                        {{ news._source.NER_cur }}
+                        {{ blank }}
                     </div>
                     <div class="col-sm-2"></div>
                 </div>

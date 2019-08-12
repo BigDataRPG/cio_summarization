@@ -32,8 +32,7 @@ class LongNews(db.Model):
         self.flg_fix = flg_fix
 
     def __repr__(self):
-        return f"LongNews('{self.luid}', '{self.body}', '{self.summary}')" \
-            f"LongNews('{self.flg_model}', '{self.flg_human}', '{self.flg_done}', '{self.flg_fix}')"
+        return f"LongNews('{self.luid}', '{self.flg_done}', '{self.flg_fix}')"
 
 # class ShortNews(db.Model):
 #    lid = db.Column('long_id', db.Integer, primary_key=True, nullable=False)
@@ -66,5 +65,8 @@ news_1 = LongNews(body="ความซ้ำซ้อน (ความซ้ำ
 if __name__ == "__main__":
     # db.session.add(news_1)
     # db.session.commit()
-    print(LongNews.query.all())
-    print(LongNews.query.filter_by(flg_done=1).first())
+    obj = LongNews.query.filter_by(flg_done=1).all()
+    print(obj)
+    # for i in obj:
+    #     print(i.body)
+    # print(LongNews.query.filter_by(flg_done=1).first())
