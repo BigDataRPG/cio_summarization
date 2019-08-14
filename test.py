@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import random
 from sqlalchemy.sql import func
-from sqlalchemy.orm import load_only
+import os
 
 
 app = Flask(__name__)
@@ -38,7 +38,7 @@ class LongNews(db.Model):
             f"'{self.flg_model}', '{self.flg_human}', '{self.flg_done}', '{self.flg_fix}')"
 
 
-PATH_OILLONG = "/Users/redthegx/project/cio_summarization/oil_long/01022019.txt"
+PATH_OILLONG = "/Users/redthegx/project/cio_summarization/oil_long/"
 
 def preprocessing_text(text_edu):
 
@@ -61,24 +61,27 @@ def pharse_data_to_json(news_edu, text_ls):
                   summary="",
                   flg_model=num_rand_str,
                   flg_human="",
-                  flg_done=1,
+                  flg_done=0,
                   flg_fix=0
                   )
 
     return news_pharse, num_rand_str
 
 def order_by_random():
-    return LongNews.query.order_by(func.random()).first()
+    return LongNews.query.filter_by(flg_done=0).order_by(func.random()).first()
 
 if __name__ == "__main__":
-    # with open(PATH_OILLONG, mode="r", encoding="utf-8") as file:
-    #     data_line = file.readlines()
-    #     data_ls = [preprocessing_text(edu) for edu in data_line]
-    #     data_str = "".join(data_ls)
-    #     news_pharse, num_rand_str = pharse_data_to_json(data_str, data_ls)
-    #     db.session.add(news_pharse)
-    #     db.session.commit()
-    #     print(num_rand_str)
+
+    # oil_long_ls = os.listdir(PATH_OILLONG)
+    # for file in oil_long_ls:
+    #     with open(PATH_OILLONG + file, mode="r", encoding="utf-8") as file:
+    #         data_line = file.readlines()
+    #         data_ls = [preprocessing_text(edu) for edu in data_line]
+    #         data_str = "".join(data_ls)
+    #         news_pharse, num_rand_str = pharse_data_to_json(data_str, data_ls)
+    #         db.session.add(news_pharse)
+    #         db.session.commit()
+    #         print(num_rand_str)
 
 
 
@@ -99,9 +102,17 @@ if __name__ == "__main__":
     # LongNews.query.filter_by(luid=1).delete()
     # db.session.commit()
     print(type(order_by_random()))
-    print(order_by_random().luid)
-    print(order_by_random().luid)
-    print(order_by_random().luid)
+    print(order_by_random())
+    # print(order_by_random().body.split("<EDU>"))
+    # for i in str(order_by_random().flg_model):
+    #     print(i)
+    # print([flg for flg in str(order_by_random().flg_model)])
+    # print(order_by_random().flg_human)
+    # print(order_by_random().luid)
+    # print(order_by_random().luid)
+    # print(order_by_random().luid)
+    # print(order_by_random().luid)
+    # print(order_by_random().luid)
     # left_result_query = LongNews.query.filter_by(flg_done=0)
     # left_result_obj = left_result_query.all()
     # for left_result_ in left_result_obj:

@@ -42,8 +42,5 @@ DELETE ALL DATA IN SELECTED TABLE
         print(data)
         db.session.commit()
 """
-def order_by_random():
-    return LongNews.query.order_by(func.random()).first()
-
-if __name__ == "__main__":
-    print(order_by_random)
+def query_order_by_random():
+    return LongNews.query.filter_by(flg_done=0).order_by(func.random()).first()

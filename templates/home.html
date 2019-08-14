@@ -59,15 +59,15 @@
             <div class="col-sm-2"></div>
             <div class="col-sm" ALIGN="center">
                 <h5>TOTAL NEWS: </h5>
-                {{ total_result }}
+                {{ result_total }}
             </div>
             <div class="col-sm" ALIGN="center">
                 <h5>COMPLETED: </h5>
-                {{ done_result }}
+                {{ result_total_done }}
             </div>
             <div class="col-sm" ALIGN="center">
                 <h5>LEFT: </h5>
-                <p> {{ left_result }} </p>
+                <p> {{ result_total_left }} </p>
             </div>
             <div class="col-sm-2"></div>
         </div>
@@ -77,9 +77,7 @@
     <div class="container">
         <!-- For loop Content from Search-->
         <div class="container">
-            {% for long_news in left_result_obj %}
             <table class="table">
-                {% if long_news %}
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -88,11 +86,10 @@
                         <th scope="col">HUMAN CHECK</th>
                     </tr>
                 </thead>
-                {% endif %}
-                {% for left_text, flg_model, flg_human in left_result_dct[long_news.luid]|zip(flg_model_dct[long_news.luid], flg_model_dct[long_news.luid]) %}
+                {% for left_text in result_left_edu_ls %}
                 <tbody>
                     <tr>
-                        <th scope="row">{{ long_news.luid }}</th>
+                        <th scope="row">{{ result_left.luid }}</th>
                         <td>
                             {{ left_text }}
                         </td>
@@ -124,7 +121,6 @@
             </table>
             <br>
             <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
-            {% endfor %}
         </div>
     </div>
 
