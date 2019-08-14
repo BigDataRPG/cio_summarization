@@ -1,11 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy_utils import UUIDType
+from sqlalchemy.sql import func
 
 app = Flask(__name__)
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///summary.sqlite3"
 SQLALCHEMY_DATABASE_URI = "sqlite:////Users/redthegx/project/cio_summarization/sqlite-tools-osx-x86-3290000/summary.db"
-
+app.jinja_env.filters['zip'] = zip
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -32,39 +31,19 @@ class LongNews(db.Model):
         self.flg_fix = flg_fix
 
     def __repr__(self):
-        return f"LongNews('{self.luid}', '{self.body}', '{self.summary}')" \
-            f"LongNews('{self.flg_model}', '{self.flg_human}', '{self.flg_done}', '{self.flg_fix}')"
+        return f"LongNews('{self.luid}', '{self.body}', '{self.summary}', " \
+            f"'{self.flg_model}', '{self.flg_human}', '{self.flg_done}', '{self.flg_fix}')"
 
-# class ShortNews(db.Model):
-#    lid = db.Column('long_id', db.Integer, primary_key=True, nullable=False)
-#    body = db.Column(db.Text, nullable=False)
-#    summary = db.Column(db.String, nullable=False)
-#    flg_model = db.Column(db.Integer, nullable=False)
-#    flg_human = db.Column(db.Integer, nullable=False)
-#
-#    def __init__(self, lid, body, summary):
-#       self.lid = lid
-#       self.body = body
-#       self.summary = summary
-#
-#    def __repr__(self):
-#       return f"ShortNews('{self.lid}', '{self.flg_model}', '{self.flg_human}')"
-
-# db.create_all()
-#
-news_1 = LongNews(body="ความซ้ำซ้อน (ความซ้ำซ้อน; ในภาษาอังกฤษ",
-                  summary="ความซ้ำซ้อน (ความซ้ำซ้อน; ในภาษาอังกฤษ",
-                  flg_model="1,0,0",
-                  flg_human="1,1,0",
-                  flg_done=1,
-                  flg_fix=0
-                  )
-
-# db.session.commit()
-
+"""
+DELETE ALL DATA IN SELECTED TABLE
+    >> all_data = LongNews.query.all()
+    >> for data in all_data:
+        db.session.delete(data)
+        print(data)
+        db.session.commit()
+"""
+def order_by_random():
+    return LongNews.query.order_by(func.random()).first()
 
 if __name__ == "__main__":
-    # db.session.add(news_1)
-    # db.session.commit()
-    print(LongNews.query.all())
-    print(LongNews.query.filter_by(flg_done=1).first())
+    print(order_by_random)

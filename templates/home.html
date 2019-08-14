@@ -78,40 +78,56 @@
         <!-- For loop Content from Search-->
         <div class="container">
             {% for long_news in left_result_obj %}
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-4">
-                        <p><strong>SOURCE: </strong></p>
-                        {{ long_news.body }}
-                    </div>
-                    <div class="col-sm-4">
-                        <p><strong>DATE: </strong></p>
-                        {{ long_news.summary }}
-                    </div>
-                    <div class="col-sm-2"></div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm">
-                        <p><strong>Name Entity: </strong></p>
-                        {{ blank }}
-                        {{ blank }}
-                    </div>
-                    <div class="col-sm">
-                        <p><strong>Event Date: </strong></p>
-                        {{ blank }}
-                    </div>
-                    <div class="col-sm">
-                        <p><strong>Flow Currency: </strong></p>
-                        {{ blank }}
-                    </div>
-                    <div class="col-sm-2"></div>
-                </div>
-                <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
+            <table class="table">
+                {% if long_news %}
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">NEWS</th>
+                        <th scope="col">MODEL PRED</th>
+                        <th scope="col">HUMAN CHECK</th>
+                    </tr>
+                </thead>
+                {% endif %}
+                {% for left_text, flg_model, flg_human in left_result_dct[long_news.luid]|zip(flg_model_dct[long_news.luid], flg_model_dct[long_news.luid]) %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ long_news.luid }}</th>
+                        <td>
+                            {{ left_text }}
+                        </td>
+                        <td>
+                            {% if flg_model == "1" %}
+                            <!-- Default checked disabled -->
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultCheckedDisabled2" checked disabled>
+                                <label class="custom-control-label" for="defaultCheckedDisabled2"></label>
+                            </div>
+                            {% else %}
+                            <!-- Default unchecked disabled -->
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUncheckedDisabled2" disabled>
+                                <label class="custom-control-label" for="defaultUncheckedDisabled2"></label>
+                            </div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <!-- Default unchecked -->
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked {{ left_text[:3] }}" value="{{ flg_human }}">
+                                <label class="custom-control-label" for="defaultUnchecked {{ left_text[:3] }}"></label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            <br>
+            <hr WIDTH="50%" ALIGN="center" SIZE="3" NOSHADE COLOR="#BBBBBB">
             {% endfor %}
         </div>
     </div>
+
 
     <!-- Space section -->
     <div class="container">
